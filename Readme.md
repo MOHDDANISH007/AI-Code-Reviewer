@@ -1,39 +1,4 @@
 
-<img width="472" height="272" alt="Auth" src="https://github.com/user-attachments/assets/5537e534-d243-473e-9868-74ab44acfbc5" />
-
-
-<img width="439" height="319" alt="code_editor_AI_Service" src="https://github.com/user-attachments/assets/0c50012e-3909-41a2-acab-91676f9eb89c" />
-
-
-<img width="509" height="400" alt="Contest_participation" src="https://github.com/user-attachments/assets/080e1197-4554-4b9f-8d0d-2ae5b7a35a85" />
-
-
-
-<img width="452" height="337" alt="AI_Chat_Service" src="https://github.com/user-attachments/assets/6bca083f-5ffb-402c-9176-f284f020652c" />
-
-
-
-
-<img width="521" height="398" alt="Overall_System_Design" src="https://github.com/user-attachments/assets/dad0ec1e-9891-4c4f-9ff1-45ddcb987cae" />
-
-<img width="3449" height="2240" alt="User Authentication Flow" src="https://github.com/user-attachments/assets/bb09e433-5050-4877-8e8b-a99780ab27eb" />
-
-
-
-<img width="5394" height="3963" alt="Contest Participation Flow" src="https://github.com/user-attachments/assets/e2fd0578-43c0-455d-acfc-6ee3729201f2" />
-
-
-<img width="4497" height="2808" alt="Code Editor   AI Review Flow" src="https://github.com/user-attachments/assets/4661f1d8-81bf-45d5-8294-ccec8370b7e2" />
-
-
-
-<img width="4431" height="3055" alt="AI Chat Service Flow" src="https://github.com/user-attachments/assets/ae244bd5-ef29-434a-97fe-da563ae60511" />
-
-
-
-
-
-
 # 🚀 AI Coding Contest Platform
 
 ## 🎯 What is this?
@@ -152,3 +117,43 @@ Check out our documentation or create an issue in the repository!
 
 ## 🎉 Welcome to the future of coding practice!
 **Where every coder gets their own AI coach!** 🚀
+
+
+
+
+
+
+
+<img width="472" height="272" alt="Auth" src="https://github.com/user-attachments/assets/5537e534-d243-473e-9868-74ab44acfbc5" />
+
+
+<img width="439" height="319" alt="code_editor_AI_Service" src="https://github.com/user-attachments/assets/0c50012e-3909-41a2-acab-91676f9eb89c" />
+
+
+<img width="509" height="400" alt="Contest_participation" src="https://github.com/user-attachments/assets/080e1197-4554-4b9f-8d0d-2ae5b7a35a85" />
+
+
+
+<img width="452" height="337" alt="AI_Chat_Service" src="https://github.com/user-attachments/assets/6bca083f-5ffb-402c-9176-f284f020652c" />
+
+
+
+
+<img width="521" height="398" alt="Overall_System_Design" src="https://github.com/user-attachments/assets/dad0ec1e-9891-4c4f-9ff1-45ddcb987cae" />
+
+<img width="3449" height="2240" alt="User Authentication Flow" src="https://github.com/user-attachments/assets/bb09e433-5050-4877-8e8b-a99780ab27eb" />
+
+
+
+<img width="5394" height="3963" alt="Contest Participation Flow" src="https://github.com/user-attachments/assets/e2fd0578-43c0-455d-acfc-6ee3729201f2" />
+
+
+<img width="4497" height="2808" alt="Code Editor   AI Review Flow" src="https://github.com/user-attachments/assets/4661f1d8-81bf-45d5-8294-ccec8370b7e2" />
+
+
+
+<img width="4431" height="3055" alt="AI Chat Service Flow" src="https://github.com/user-attachments/assets/ae244bd5-ef29-434a-97fe-da563ae60511" />
+
+
+
+

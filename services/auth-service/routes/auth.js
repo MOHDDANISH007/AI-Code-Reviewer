@@ -1,12 +1,11 @@
 const express = require('express')
 const jwt = require('jsonwebtoken')
-const User = require('../models/User')
+const User = require('../models/User.js')
 const bcrypt = require('bcryptjs')
 const router = express.Router()
 const passport = require('passport')
 const dotenv = require('dotenv')
 dotenv.config()
-
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_default_secret'
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '7d'
@@ -45,6 +44,14 @@ router.post('/register', async (req, res) => {
       JWT_SECRET,
       { expiresIn: JWT_EXPIRES_IN }
     )
+
+    // 🍪 Set cookie
+    res.cookie('token', token, {
+      httpOnly: true,       // prevents JavaScript access
+      secure: false,        // set to true in production with HTTPS
+      sameSite: 'lax',      // helps prevent CSRF
+      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+    })
 
     res.status(201).json({
       message: 'User registered successfully',
@@ -86,6 +93,14 @@ router.post('/login', async (req, res) => {
       { expiresIn: JWT_EXPIRES_IN }
     )
 
+    // 🍪 Set cookie on login
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax',
+      maxAge: 7 * 24 * 60 * 60 * 1000
+    })
+
     res.json({
       message: 'Login successful',
       token,
@@ -105,13 +120,9 @@ router.post('/login', async (req, res) => {
 // ✅ Logout
 router.post('/logout', (req, res) => {
   try {
-    // For JWT-based auth, we can’t “invalidate” a token on server directly.
-    // But you can make the client delete it or store blacklisted tokens in DB.
-    // For now, we’ll just instruct the client to remove it.
-    res.json({
-      message:
-        'Logout successful — please delete your token on the client side.'
-    })
+    // 🍪 Clear the cookie
+    res.clearCookie('token')
+    res.json({ message: 'Logout successful. Token cleared from cookies.' })
   } catch (error) {
     console.error('Logout Error:', error)
     res.status(500).json({ error: error.message })
@@ -142,7 +153,14 @@ router.get(
         { expiresIn: JWT_EXPIRES_IN }
       )
 
-      // Send user details + token
+      // 🍪 Set cookie for GitHub login
+      res.cookie('token', token, {
+        httpOnly: true,
+        secure: false,
+        sameSite: 'lax',
+        maxAge: 7 * 24 * 60 * 60 * 1000
+      })
+
       res.json({
         message: 'GitHub Login successful',
         token,

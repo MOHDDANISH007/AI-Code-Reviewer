@@ -67,8 +67,8 @@ Think of it like **LeetCode + ChatGPT combined!** 🤖💻
 ### Run the project:
 ```bash
 # Clone the project 
-git clone <your-repo>
-cd coding-platform
+git clone https://github.com/MOHDDANISH007/AI-Code-Reviewer.git
+cd Final_Year_Project
 
 # Start everything with one command!
 docker-compose up --build

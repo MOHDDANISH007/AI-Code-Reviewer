@@ -52,14 +52,6 @@ app.get('/api/profile', authenticateToken, (req, res) => {
   })
 })
 
-// Health check
-app.get('/health', (req, res) => {
-  res.json({
-    status: 'Auth service is running',
-    timestamp: new Date().toISOString()
-  })
-})
-
 // Start server
 app.listen(PORT, () => {
   console.log(`✅ Auth service running on port ${PORT}`)

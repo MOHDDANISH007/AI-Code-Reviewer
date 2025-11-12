@@ -1,0 +1,1 @@
+console.log("AI Model Service is running");

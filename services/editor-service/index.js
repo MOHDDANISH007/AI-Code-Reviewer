@@ -1,0 +1,1 @@
+console.log("Contest Service is running");  

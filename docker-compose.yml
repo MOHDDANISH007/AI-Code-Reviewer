@@ -18,9 +18,7 @@ services:
     networks:
       - app-network
     healthcheck:
-      test: |
-        mongosh --eval "
-        db.adminCommand('ping')"
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -32,8 +30,8 @@ services:
     container_name: rabbitmq
     restart: unless-stopped
     ports:
-      - "5672:5672"   # Message queue port
-      - "15672:15672" # Management UI port
+      - "5672:5672"
+      - "15672:15672"
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
@@ -49,7 +47,7 @@ services:
 
   # 🔐 Auth Service
   auth-service:
-    build: 
+    build:
       context: ./services/auth-service
       dockerfile: Dockerfile
     container_name: auth-service
@@ -59,9 +57,9 @@ services:
     env_file:
       - ./services/auth-service/.env
     environment:
-      - NODE_ENV=production
-      - DB_HOST=mongodb
-      - DB_PORT=27017
+      NODE_ENV: production
+      DB_HOST: mongodb
+      DB_PORT: 27017
     depends_on:
       mongodb:
         condition: service_healthy
@@ -76,7 +74,7 @@ services:
 
   # 💻 Editor Service
   editor-service:
-    build: 
+    build:
       context: ./services/editor-service
       dockerfile: Dockerfile
     container_name: editor-service
@@ -86,11 +84,11 @@ services:
     env_file:
       - ./services/editor-service/.env
     environment:
-      - NODE_ENV=production
-      - DB_HOST=mongodb
-      - DB_PORT=27017
-      - RABBITMQ_HOST=rabbitmq
-      - RABBITMQ_PORT=5672
+      NODE_ENV: production
+      DB_HOST: mongodb
+      DB_PORT: 27017
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
     depends_on:
       mongodb:
         condition: service_healthy
@@ -116,8 +114,10 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
       - ./nginx/logs:/var/log/nginx
     depends_on:
-      - auth-service
-      - editor-service
+      auth-service:
+        condition: service_started
+      editor-service:
+        condition: service_started
     networks:
       - app-network
     healthcheck:

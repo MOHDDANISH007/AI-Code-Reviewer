@@ -20,16 +20,18 @@ async function connectRabbitMQ() {
   }
 }
 
-async function sendToQueue(code, language, userId) {
+async function sendToQueue(code, language, userId, userName) {
   try {
     if (!channel) {
       await connectRabbitMQ();
     }
 
+
     const message = {
       code: code,
       language: language,
       userId: userId,
+      userName: userName,
       timestamp: new Date()
     };
 

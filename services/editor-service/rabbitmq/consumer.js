@@ -131,7 +131,7 @@ async function startConsumer () {
             const message = JSON.parse(msg.content.toString())
             console.log(
               `📨 Received ${language} code from user:`,
-              message.userId
+              message.userName
             )
 
             // Execute the code

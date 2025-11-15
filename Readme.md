@@ -98,7 +98,7 @@ coding-platform/
 We're building this step by step:
 - ✅ **Phase 1**: User authentication
 - 🔜 **Phase 2**: Contest system
-- 🔜 **Phase 3**: Code editor
+- ✅ **Phase 3**: Code editor
 - 🔜 **Phase 4**: AI integration
 - 🔜 **Phase 5**: Frontend website
 

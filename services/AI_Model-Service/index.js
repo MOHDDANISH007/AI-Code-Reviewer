@@ -6,6 +6,7 @@ const dotenv = require('dotenv')
 
 const connectDB = require('./DB/db.js')
 const AI_Model_Routes = require('./routes/AI_Model.routes.js')
+const { startConsumer } = require('./rabbitMQ/consumer.js')
 
 
 dotenv.config()
@@ -13,6 +14,10 @@ dotenv.config()
 
 // connectToDB
 connectDB()
+
+
+// Start consumer
+startConsumer()
 
 const app = express()
 const PORT = process.env.PORT || 3003

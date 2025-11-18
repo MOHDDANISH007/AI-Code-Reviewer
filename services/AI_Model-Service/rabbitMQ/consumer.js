@@ -1,4 +1,6 @@
 const amqplib = require('amqplib')
+const { Cerebras_AI_Service } = require('../AI_Service/Cerebreas_AI.service.js')
+const { enhancePreviousAIResponse } = require('../AI_Service/Groq_AI.Service.js')
 
 let channel = null
 
@@ -24,24 +26,41 @@ async function startConsumer() {
 
     console.log('🔄 Waiting for messages in AI_Model_Queue...')
 
-    channel.consume('AI_Model_Queue', async (msg) => {
+    channel.consume('AI_Model_Queue', async msg => {
       if (msg !== null) {
         try {
           const message = JSON.parse(msg.content.toString())
           console.log('📨 Received AI_Model message:', message)
 
-          // ✅ PROCESS YOUR AI MODEL LOGIC HERE
-          console.log('🤖 Processing AI Model for user:', message.userName)
-          console.log('💬 Message:', message.message)
+          // ✅ STEP 1: GET INITIAL RESPONSE FROM CEREBRAS AI
+          console.log('🔄 Getting initial response from Cerebras AI...')
+          const initialResponse = await Cerebras_AI_Service(
+            message.userName,
+            message.message
+          )
           
-          // ✅ SIMULATE AI PROCESSING
-          await new Promise(resolve => setTimeout(resolve, 2000))
+          console.log('✅ Cerebras AI Response completed')
+          // console.log('🤖 Initial Response:', initialResponse)
+
+          // ✅ STEP 2: ENHANCE WITH GROQ AI FOR BETTER QUALITY
+          console.log('🔄 Enhancing response with Groq AI for better accuracy...')
+          const enhancedResponse = await enhancePreviousAIResponse(
+            message.userName,
+            message.message,
+            initialResponse
+          )
+          
+          console.log('✅ Groq AI Enhancement completed')
+          console.log('🎯 Enhanced Final Response:', enhancedResponse)
           console.log('✅ AI Processing completed for user:', message.userName)
 
-          // ✅ ACKNOWLEDGE MESSAGE - IMPORTANT!
+          // ✅ STEP 3: HERE YOU CAN SAVE enhancedResponse TO DATABASE
+          // await saveToDatabase(message.userId, enhancedResponse);
+
+          // ✅ ACKNOWLEDGE MESSAGE
           channel.ack(msg)
           console.log('✅ Message acknowledged')
-
+          
         } catch (error) {
           console.error('❌ Failed to process AI_Model message:', error)
           // ✅ NEGATIVE ACKNOWLEDGE ON ERROR

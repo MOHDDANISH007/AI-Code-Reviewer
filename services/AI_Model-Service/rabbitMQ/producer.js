@@ -12,12 +12,7 @@ async function connectRabbitMQ() {
       durable: true
     })
 
-    // 🆕 CREATE QUEUE AND BIND IT
-    const queueName = 'AI_Model_Queue'
-    await channel.assertQueue(queueName, { durable: true })
-    await channel.bindQueue(queueName, 'AI_Model_Exchange', 'AI_Model_Routing_Key')
-
-    console.log('✅ Connected to RabbitMQ with Exchange & Queue')
+    console.log('✅ Connected to RabbitMQ with Exchange')
     return channel
   } catch (error) {
     console.error('❌ RabbitMQ connection failed:', error)
@@ -39,7 +34,7 @@ async function sendToQueue(message, userId, userName) {
     }
 
     const routingKey = 'AI_Model_Routing_Key'
-
+    
     // Send to exchange with routing key
     const success = channel.publish(
       'AI_Model_Exchange',
@@ -53,6 +48,7 @@ async function sendToQueue(message, userId, userName) {
     } else {
       throw new Error('Failed to publish message to RabbitMQ')
     }
+
   } catch (error) {
     console.error('❌ Failed to send to queue:', error)
     throw error

@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-
 const chatHistorySchema = new mongoose.Schema({
-  user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  // user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  user : String,
   messages: [
     {
       sender: { type: String, enum: ["user", "AI"], required: true },

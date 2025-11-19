@@ -1,12 +1,15 @@
 const express = require('express')
+
 const { sendToQueue } = require('../rabbitMQ/producer.js')
+const { verifyToken } = require('../middleware/authenticationVerify.js') // FIXED
 
 const router = express.Router()
 
-router.post('/run', async (req, res) => {
+router.post('/run', verifyToken, async (req, res) => {
   try {
-    const { message, userID, userName } = req.body
-
+    const { message } = req.body
+    const userID = req.user.userId
+    const userName = req.user.username
     await sendToQueue(message, userID, userName)
 
     res

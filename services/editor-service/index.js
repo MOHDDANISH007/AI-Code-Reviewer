@@ -1,8 +1,9 @@
 const express = require('express')
 const cors = require('cors')
 // Remove session and cookie-parser for API service
-// const session = require('express-session')
-// const cookieParser = require('cookie-parser')
+const session = require('express-session')
+const cookieParser = require('cookie-parser')
+const expressSession = require('express-session')
 
 require('dotenv').config()
 

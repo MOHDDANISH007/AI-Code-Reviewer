@@ -4,7 +4,7 @@ let channel = null
 
 async function connectRabbitMQ() {
   try {
-    const connection = await amqp.connect('amqp://localhost:5672')
+    const connection = await amqp.connect('amqp://rabbitmq:5672')
     channel = await connection.createChannel()
 
     // Create EXCHANGE

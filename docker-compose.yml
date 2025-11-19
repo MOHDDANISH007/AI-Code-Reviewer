@@ -102,6 +102,36 @@ services:
       timeout: 10s
       retries: 3
 
+  # 🤖 AI Service (Uses your existing AI_Model-Service folder)
+  ai-service:
+    build:
+      context: ./services/AI_Model-Service
+      dockerfile: Dockerfile
+    container_name: ai-service
+    restart: unless-stopped
+    ports:
+      - "3003:3003"
+    env_file:
+      - ./services/AI_Model-Service/.env
+    environment:
+      NODE_ENV: production
+      DB_HOST: mongodb
+      DB_PORT: 27017
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3003/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
   # 🚀 Nginx Reverse Proxy
   nginx:
     image: nginx:alpine
@@ -117,6 +147,8 @@ services:
       auth-service:
         condition: service_started
       editor-service:
+        condition: service_started
+      ai-service:
         condition: service_started
     networks:
       - app-network
